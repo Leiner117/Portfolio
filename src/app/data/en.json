@@ -8,8 +8,8 @@
   },
   "hero": {
     "name": "Leiner Alvarado Rodriguez",
-    "title": "Software Developer & Designer",
-    "description": "Passionate about creating innovative solutions"
+    "title": "Fullstack Developer",
+    "description": "Final-year Computer Engineering student passionate about web development, data analysis, and immersive technologies."
   },
   "sections": {
     "projects": "Projects",
@@ -20,45 +20,45 @@
   "projects": [
     {
       "id": 1,
-      "title": "Project Title 1",
-      "description": "Project description placeholder for the first project",
-      "technologies": ["React", "TypeScript", "Tailwind CSS"],
+      "title": "Tourism Company Website",
+      "description": "Developed a responsive website for a tourism company using Next.js, TypeScript, and Firebase, focusing on SEO optimization and performance.",
+      "technologies": ["Next.js", "TypeScript", "Firebase"],
       "link": "#",
-      "github": "#"
+      "github": "https://github.com/Leiner117"
     },
     {
       "id": 2,
-      "title": "Project Title 2",
-      "description": "Project description placeholder for the second project",
-      "technologies": ["Next.js", "Node.js", "MongoDB"],
+      "title": "Medical Clinics SaaS Platform",
+      "description": "Contributed to a SaaS platform for medical clinics, implementing Firebase Cloud Functions and optimizing Firestore queries to reduce client costs.",
+      "technologies": ["React", "Firebase", "TypeScript"],
       "link": "#",
-      "github": "#"
+      "github": "https://github.com/Leiner117"
     },
     {
       "id": 3,
-      "title": "Project Title 3",
-      "description": "Project description placeholder for the third project",
-      "technologies": ["Python", "Django", "PostgreSQL"],
+      "title": "Metaverse Project",
+      "description": "Collaborated with a multidisciplinary team to create a metaverse for TEC, building C# scripts for spatial audio, movement, and multiplayer synchronization.",
+      "technologies": ["Unity", "C#", "Unity Game Services"],
       "link": "#",
-      "github": "#"
+      "github": "https://github.com/Leiner117"
     }
   ],
   "experience": [
     {
       "id": 1,
-      "position": "Senior Software Developer",
-      "company": "Company Name",
-      "period": "2020 - Present",
-      "description": "Experience description placeholder highlighting key responsibilities and achievements in this role.",
-      "technologies": ["React", "TypeScript", "Node.js"]
+      "position": "Fullstack Developer",
+      "company": "Bufost, San Carlos",
+      "period": "Apr 2025 – Present",
+      "description": "Developed and optimized responsive web applications with Next.js, TypeScript, and Firebase, focusing on SEO and performance. Implemented Firebase Cloud Functions and optimized Firestore queries to reduce costs. Worked under Scrum methodology with Jira.",
+      "technologies": ["Next.js", "TypeScript", "Firebase"]
     },
     {
       "id": 2,
-      "position": "Full Stack Developer",
-      "company": "Another Company",
-      "period": "2018 - 2020",
-      "description": "Experience description placeholder for previous position with details about projects and contributions.",
-      "technologies": ["JavaScript", "Python", "AWS"]
+      "position": "Unity Developer",
+      "company": "Tecnológico de Costa Rica",
+      "period": "Feb 2024 – Present",
+      "description": "Collaborated in a team of 7 to develop a metaverse for the university. Built C# scripts for spatial audio, player movement, and server synchronization. Configured multiplayer functionality using Unity Game Services.",
+      "technologies": ["Unity", "C#", "Unity Game Services"]
     }
   ],
   "skills": [
@@ -89,16 +89,36 @@
     },
     {
       "id": 6,
-      "name": "PostgreSQL",
+      "name": "SQL",
       "category": "Database"
     },
     {
       "id": 7,
-      "name": "MongoDB",
-      "category": "Database"
+      "name": "Snowflake",
+      "category": "Data Tools"
     },
     {
       "id": 8,
+      "name": "Databricks",
+      "category": "Data Tools"
+    },
+    {
+      "id": 9,
+      "name": "Pandas",
+      "category": "Data Tools"
+    },
+    {
+      "id": 10,
+      "name": "PySpark",
+      "category": "Data Tools"
+    },
+    {
+      "id": 11,
+      "name": "C#",
+      "category": "Backend / Game Dev"
+    },
+    {
+      "id": 12,
       "name": "Git",
       "category": "Tools"
     }
@@ -106,8 +126,8 @@
   "contact": {
     "title": "Contact",
     "description": "Feel free to reach out if you'd like to connect or discuss potential opportunities.",
-    "email": "Email",
-    "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "email": "leineralvarador117@gmail.com",
+    "linkedin": "https://linkedin.com/in/leiner-alvarado-357725247",
+    "github": "https://github.com/Leiner117"
   }
 }
