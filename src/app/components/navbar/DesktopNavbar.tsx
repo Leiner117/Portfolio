@@ -3,14 +3,10 @@ import React from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 const DesktopNavbar = () => {
-  const { language, setLanguage, t } = useLanguage();
-
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "es" : "en");
-  };
+  const { t } = useLanguage();
 
   return (
-    <nav className="flex items-center space-x-8">
+    <div className="flex items-center space-x-8">
       <ul className="flex space-x-6">
         <li>
           <a
@@ -45,22 +41,7 @@ const DesktopNavbar = () => {
           </a>
         </li>
       </ul>
-      <div className="flex items-center space-x-2">
-        <button
-          className="p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors"
-          aria-label="Toggle theme"
-        >
-          🌓
-        </button>
-        <button
-          onClick={toggleLanguage}
-          className="p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors font-semibold"
-          aria-label="Change language"
-        >
-          {language.toUpperCase()}
-        </button>
-      </div>
-    </nav>
+    </div>
   );
 };
 
