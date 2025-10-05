@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import { FaMoon, FaSun } from 'react-icons/fa';
 
-const MobileNavbar = () => {
+const MobileNavbar = ({ onToggleTheme, theme }: { onToggleTheme?: () => void; theme?: 'light' | 'dark' }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
@@ -17,12 +18,14 @@ const MobileNavbar = () => {
   return (
     <nav className="relative w-full">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+          <div className="flex items-center">
+          <span className="font-bold text-[var(--color-text)] mr-3">Leiner Alvarado</span>
           <button 
-            className="p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors" 
+            onClick={() => onToggleTheme && onToggleTheme()}
+            className="mr-3 p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors flex items-center justify-center" 
             aria-label="Toggle theme"
           >
-            🌓
+            {theme === 'dark' ? <FaSun /> : <FaMoon />}
           </button>
           <button 
             onClick={toggleLanguage}
