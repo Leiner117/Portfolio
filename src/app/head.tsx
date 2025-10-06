@@ -12,6 +12,10 @@ export default function Head() {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta
+        name="google-site-verification"
+        content="vVnebu8-cSRPntnQm09sEPmjYo1g4azO6R4n6PCDmSk"
+      />
       <link rel="icon" type="image/svg+xml" href="/file.svg?v=2" />
       <link rel="apple-touch-icon" sizes="180x180" href="/file.svg" />
       <link rel="mask-icon" href="/file.svg" color="#111827" />
