@@ -12,6 +12,7 @@ export default function Head() {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="google" content="notranslate" />
       <meta
         name="google-site-verification"
         content="vVnebu8-cSRPntnQm09sEPmjYo1g4azO6R4n6PCDmSk"
