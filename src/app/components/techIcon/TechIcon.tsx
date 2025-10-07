@@ -20,12 +20,11 @@ import {
   SiHtml5,
   SiCss3,
   SiDjango,
-  SiPostgresql,
   SiMongodb,
   SiFirebase,
   SiPandas,
 } from "react-icons/si";
-
+import { PiFileSql } from "react-icons/pi";
 type Props = {
   name: string;
   size?: number;
@@ -68,7 +67,7 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "" }) => {
     case key.includes("postgres") ||
       key.includes("postgresql") ||
       key.includes("sql"):
-      return <SiPostgresql size={size} className={className} />;
+      return <PiFileSql size={size} className={className} />;
     case key.includes("mongo"):
       return <SiMongodb size={size} className={className} />;
     case key.includes("snowflake"):
