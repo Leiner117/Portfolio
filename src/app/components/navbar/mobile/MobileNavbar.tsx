@@ -1,19 +1,20 @@
 "use client";
-import { useState } from "react";
-import { useLanguage } from "@/app/context/LanguageContext";
 import { FaMoon, FaSun } from 'react-icons/fa';
+import List from "@/app/components/list/List";
+import { useMobileNavbarViewModel } from "./useMobileNavbarViewModel";
 
 const MobileNavbar = ({ onToggleTheme, theme }: { onToggleTheme?: () => void; theme?: 'light' | 'dark' }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { language, setLanguage, t } = useLanguage();
+  const { navigationListItems, isMobileMenuOpen, toggleMobileMenu, closeMobileMenu, language, toggleLanguage } = useMobileNavbarViewModel();
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "es" : "en");
-  };
+  const renderNavItem = (data: { id: string; label: string }) => (
+    <a
+      href={`#${data.id}`}
+      className="block py-3 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors text-left"
+      onClick={closeMobileMenu}
+    >
+      {data.label}
+    </a>
+  );
 
   return (
     <nav className="relative w-full">
@@ -36,10 +37,10 @@ const MobileNavbar = ({ onToggleTheme, theme }: { onToggleTheme?: () => void; th
           </button>
         </div>
         <button
-          onClick={toggleMenu}
+          onClick={toggleMobileMenu}
           className="p-2 rounded-md text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-border)] transition-colors focus:outline-none"
           aria-label="Toggle menu"
-          aria-expanded={isMenuOpen}
+          aria-expanded={isMobileMenuOpen}
         >
           <svg
             className="h-6 w-6"
@@ -48,7 +49,7 @@ const MobileNavbar = ({ onToggleTheme, theme }: { onToggleTheme?: () => void; th
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            {isMenuOpen ? (
+            {isMobileMenuOpen ? (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -68,49 +69,18 @@ const MobileNavbar = ({ onToggleTheme, theme }: { onToggleTheme?: () => void; th
       </div>
       <div
         className={`fixed left-0 right-0 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)] shadow-md w-screen transition-all duration-300 ease-in-out overflow-hidden ${
-          isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         }`}
         style={{ top: '64px' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ul className="space-y-1 py-2">
-            <li>
-              <a
-                href="#projects"
-                className="block py-3 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors text-left"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.navbar.projects}
-              </a>
-            </li>
-            <li>
-              <a
-                href="#experience"
-                className="block py-3 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors text-left"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.navbar.experience}
-              </a>
-            </li>
-            <li>
-              <a
-                href="#skills"
-                className="block py-3 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors text-left"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.navbar.skills}
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className="block py-3 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors text-left"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.navbar.contact}
-              </a>
-            </li>
-          </ul>
+          <List<{ id: string; label: string }>
+            items={navigationListItems}
+            listClassName="space-y-1 py-2"
+            containerClassName=""
+            itemClassName=""
+            renderItem={renderNavItem}
+          />
         </div>
       </div>
     </nav>
