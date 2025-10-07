@@ -5,7 +5,7 @@ export default function Head() {
   const description =
     "Desarrollador Fullstack. Portafolio con proyectos, experiencia y habilidades.";
   const url = process.env.NEXT_PUBLIC_SITE_URL || "";
-  const image = `${url || ""}/file.svg`;
+  const image = `${url || ""}/favicon.ico`;
 
   return (
     <>
@@ -17,9 +17,9 @@ export default function Head() {
         name="google-site-verification"
         content="vVnebu8-cSRPntnQm09sEPmjYo1g4azO6R4n6PCDmSk"
       />
-      <link rel="icon" type="image/svg+xml" href="/file.svg?v=2" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/file.svg" />
-      <link rel="mask-icon" href="/file.svg" color="#111827" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.ico?v=2" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+      <link rel="mask-icon" href="/favicon.svg" color="#111827" />
       <meta name="theme-color" content="#FAFAFA" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
