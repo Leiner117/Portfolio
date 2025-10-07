@@ -1,38 +1,13 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import { useCheckDeviceWidth } from "@/app/utils/index";
-import DesktopNavbar from "./DesktopNavbar";
-import MobileNavbar from "./MobileNavbar";
+import React from 'react';
+import { useNavbarViewModel } from './useNavbarViewModel';
+import DesktopNavbar from "./desktop/DesktopNavbar";
+import MobileNavbar from "./mobile/MobileNavbar";
 import Link from "next/link";
 import { FaMoon, FaSun } from 'react-icons/fa';
-import { useLanguage } from '@/app/context/LanguageContext';
 
 const Navbar = () => {
-  const { isMobile } = useCheckDeviceWidth();
-  const { language, setLanguage } = useLanguage();
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof window === 'undefined') return 'light';
-    return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
-  });
-
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
-    }
-    try {
-      localStorage.setItem('theme', theme);
-    } catch {}
-  }, [theme]);
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'es' : 'en');
-  };
-
-  const toggleTheme = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'));
+  const { isMobile, theme, toggleTheme, language, toggleLanguage } = useNavbarViewModel();
 
   return (
     <nav className="w-full bg-[var(--color-bg-secondary)] text-[var(--color-text)] border-b border-[var(--color-border)] shadow-sm fixed top-0 z-50">
