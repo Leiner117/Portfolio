@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "./components";
 import { CheckDeviceWidth_Provider } from "./utils";
 import { LanguageProvider } from "./context/LanguageContext";
+import { GoogleAnalytics }  from "./components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[var(--color-bg)] text-[var(--color-text)]`}
       >
+        <GoogleAnalytics />
         <LanguageProvider>
           <CheckDeviceWidth_Provider>
             <Navbar />
