@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import useTyping from "@/app/hooks/useTyping";
+import { useTyping } from "@/app/hooks/useTyping";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 export interface HeroViewModel {
