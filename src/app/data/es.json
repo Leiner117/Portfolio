@@ -9,7 +9,12 @@
   "hero": {
     "name": "Leiner Alvarado Rodriguez",
     "title": "Desarrollador Fullstack",
-    "description": "Estudiante de Ingeniería en Computación en último año, apasionado por el desarrollo web, el análisis de datos y las tecnologías inmersivas."
+    "description": "Estudiante de Ingeniería en Computación en último año, apasionado por el desarrollo web, el análisis de datos y las tecnologías inmersivas.",
+    "buttons": {
+      "viewProjects": "Ver Proyectos",
+      "contact": "Contactar"
+    },
+    "scroll": "Desliza"
   },
   "sections": {
     "projects": "Proyectos",
