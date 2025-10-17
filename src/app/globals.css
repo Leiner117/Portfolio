@@ -33,17 +33,12 @@
   --color-success: #66BB6A;
   --color-error: #EF9A9A;
 }
-
-/* Keep body defaults */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-/* Smooth scrolling for in-page anchors */
 html {
   scroll-behavior: smooth;
-  /* scroll-padding-top matches navbar height to avoid content being hidden under fixed navbar */
-  scroll-padding-top: 5rem; /* 80px fallback for desktop navbar */
+  scroll-padding-top: 5rem; 
 }
