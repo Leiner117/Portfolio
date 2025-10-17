@@ -7,33 +7,49 @@ import Link from "next/link";
 import { FaMoon, FaSun } from 'react-icons/fa';
 
 const Navbar = () => {
-  const { isMobile, theme, toggleTheme, language, toggleLanguage } = useNavbarViewModel();
+  const { isMobile, theme, toggleTheme, language, toggleLanguage, mounted, isScrolled, navRef } = useNavbarViewModel();
 
   return (
-    <nav className="w-full bg-[var(--color-bg-secondary)] text-[var(--color-text)] border-b border-[var(--color-border)] shadow-sm fixed top-0 z-50">
+  <nav ref={navRef} className={`w-full text-[var(--color-text)] border-b border-[var(--color-border)] fixed top-0 z-50 transition-colors ${isScrolled ? 'bg-[var(--color-bg-secondary)] shadow-sm' : 'bg-transparent border-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center h-16">
           {!isMobile && (
             <div className="flex-1 items-center">
-              <Link href="/" className="font-bold text-[var(--color-text)] hover:text-[var(--color-text-secondary)] transition-colors">
+              <Link href="/" className="font-bold hover:text-[var(--color-text-secondary)] transition-colors" style={{ color: !isScrolled ? '#FFFFFF' : undefined }}>
                 Leiner Alvarado Rodriguez
               </Link>
             </div>
           )}
 
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            {!isMobile && <DesktopNavbar />}
+            {!isMobile && <DesktopNavbar isScrolled={isScrolled} />}
           </div>
 
           <div className="flex flex-1 justify-end items-center space-x-2">
             {isMobile ? (
-              <MobileNavbar onToggleTheme={toggleTheme} theme={theme} />
+              <MobileNavbar onToggleTheme={toggleTheme} theme={theme} isScrolled={isScrolled} />
             ) : (
               <div className="flex items-center space-x-2">
-                <button onClick={toggleTheme} className="p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors" aria-label="Toggle theme">
-                  {theme === 'dark' ? <FaSun /> : <FaMoon />}
+                <button 
+                  onClick={toggleTheme} 
+                  className="p-2 rounded-full transition-colors" 
+                  aria-label="Toggle theme" 
+                  style={{ 
+                    color: !isScrolled ? '#FFFFFF' : undefined,
+                    backgroundColor: 'transparent'
+                  }}
+                >
+                  {mounted ? (theme === 'dark' ? <FaSun /> : <FaMoon />) : <span style={{ display: 'inline-block', width: '1em', height: '1em' }} />}
                 </button>
-                <button onClick={toggleLanguage} className="p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors font-semibold text-sm" aria-label="Change language">
+                <button 
+                  onClick={toggleLanguage} 
+                  className="p-2 rounded-full transition-colors font-semibold text-sm" 
+                  aria-label="Change language" 
+                  style={{ 
+                    color: !isScrolled ? '#FFFFFF' : undefined,
+                    backgroundColor: 'transparent'
+                  }}
+                >
                   {language.toUpperCase()}
                 </button>
               </div>
