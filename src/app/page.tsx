@@ -9,13 +9,15 @@ import ContactSection from "./components/home/ContactSection";
 const Home = () => {
   useHomeViewModel();
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-  <HeroSection />
-  <ExperienceSection />
-  {/* <ProjectsSection /> */}
-  <SkillsSection />
-  <ContactSection />
-    </div>
+    <>
+      <HeroSection />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+        <ExperienceSection />
+        {/* <ProjectsSection /> */}
+        <SkillsSection />
+        <ContactSection />
+      </div>
+    </>
   );
 };
 
