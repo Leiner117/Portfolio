@@ -13,13 +13,17 @@
 
   --background: var(--color-bg);
   --foreground: var(--color-text);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --timeline-color: var(--color-text);
+  /* card surface colors */
+  --card-bg: #FFFFFF;
+  --card-fg: #000000;
+  --card-hover-bg: #000000;
+  --card-hover-fg: #FFFFFF;
+  /* animation durations (skills) */
+  --marquee-duration: 15s;
+  --marquee-timing: linear;
+  --shimmer-duration: 2s;
+  --shimmer-easing: ease-in-out;
 }
 
 [data-theme="dark"] {
@@ -32,18 +36,123 @@
   --color-border: #1F1F1F;
   --color-success: #66BB6A;
   --color-error: #EF9A9A;
+  --timeline-color: var(--color-text);
+  /* override card colors for dark theme */
+  --card-bg: rgba(255,255,255,0.04);
+  --card-fg: var(--color-text);
+  --card-hover-bg: var(--color-text);
+  --card-hover-fg: var(--color-bg);
+  /* animation durations (skills) */
+  --marquee-duration: 15s;
+  --marquee-timing: linear;
+  --shimmer-duration: 2s;
+  --shimmer-easing: ease-in-out;
 }
-
-/* Keep body defaults */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-/* Smooth scrolling for in-page anchors */
 html {
   scroll-behavior: smooth;
-  /* scroll-padding-top matches navbar height to avoid content being hidden under fixed navbar */
-  scroll-padding-top: 5rem; /* 80px fallback for desktop navbar */
+  scroll-padding-top: 5rem; 
+}
+.timeline-card {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+.timeline-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-shimmer {
+  animation: shimmer var(--shimmer-duration) var(--shimmer-easing) infinite;
+}
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee-left {
+  animation: marquee-left var(--marquee-duration) var(--marquee-timing) infinite;
+}
+.animate-marquee-right {
+  animation: marquee-right var(--marquee-duration) var(--marquee-timing) infinite;
+}
+@media (max-width: 767px) {
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+  }
+  .marquee-row-mobile {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+   padding-inline: 20vw;
+   scroll-padding-inline: 20vw;
+  }
+
+  .marquee-row-mobile .marquee-item {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+  }
+}
+.experience-card {
+  background: var(--card-bg);
+  color: var(--card-fg);
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.experience-card:hover {
+  background: var(--card-hover-bg);
+  color: var(--card-hover-fg);
+}
+
+.experience-card .timeline-marker {
+  background: var(--timeline-color);
+}
+.experience-card:hover .timeline-marker {
+  background: var(--card-hover-fg);
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-slower {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+@keyframes spin-slowest {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+.animate-spin-slower {
+  animation: spin-slower 65s linear infinite;
+}
+.animate-spin-slowest {
+  animation: spin-slowest 90s linear infinite;
+}
+:root {
+  /* ...tus otras variables */
+  --orbit-center-bg: #ffffff;
+  --orbit-center-shadow: rgba(0, 0, 0, 0.3);
+   --orbit-text-color: #000000;
+}
+
+[data-theme="dark"] {
+  /* ...tus otras variables */
+  --orbit-center-bg: #000000;
+  --orbit-center-shadow: rgba(255, 255, 255, 0.3);
+  --orbit-text-color: #ffffff;
 }

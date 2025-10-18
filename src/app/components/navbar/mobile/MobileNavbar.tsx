@@ -1,16 +1,20 @@
 "use client";
+import React, { useEffect, useState } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import List from "@/app/components/list/List";
 import { useMobileNavbarViewModel } from "./useMobileNavbarViewModel";
 
-const MobileNavbar = ({ onToggleTheme, theme }: { onToggleTheme?: () => void; theme?: 'light' | 'dark' }) => {
+const MobileNavbar = ({ onToggleTheme, theme, isScrolled }: { onToggleTheme?: () => void; theme?: 'light' | 'dark'; isScrolled?: boolean }) => {
   const { navigationListItems, isMobileMenuOpen, toggleMobileMenu, closeMobileMenu, language, toggleLanguage } = useMobileNavbarViewModel();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const renderNavItem = (data: { id: string; label: string }) => (
     <a
       href={`#${data.id}`}
-      className="block py-3 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors text-left"
+      className="block py-3 hover:text-[var(--color-primary)] transition-colors text-left"
       onClick={closeMobileMenu}
+      style={{ color: !isScrolled ? '#FFFFFF' : undefined }}
     >
       {data.label}
     </a>
@@ -20,25 +24,34 @@ const MobileNavbar = ({ onToggleTheme, theme }: { onToggleTheme?: () => void; th
     <nav className="relative w-full">
       <div className="flex items-center justify-between">
           <div className="flex items-center">
-          <span className="font-bold text-[var(--color-text)] mr-3">Leiner Alvarado</span>
+          <span className="font-bold mr-3" style={{ color: !isScrolled ? '#FFFFFF' : undefined }}>Leiner Alvarado</span>
           <button 
             onClick={() => onToggleTheme && onToggleTheme()}
-            className="mr-3 p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors flex items-center justify-center" 
+            className="mr-3 p-2 rounded-full transition-colors flex items-center justify-center" 
             aria-label="Toggle theme"
+            style={{ 
+              color: !isScrolled ? '#FFFFFF' : undefined,
+              backgroundColor: 'transparent'
+            }}
           >
-            {theme === 'dark' ? <FaSun /> : <FaMoon />}
+            {mounted ? (theme === 'dark' ? <FaSun /> : <FaMoon />) : <span style={{ display: 'inline-block', width: '1em', height: '1em' }} />}
           </button>
           <button 
             onClick={toggleLanguage}
-            className="p-2 rounded-full bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)] transition-colors font-semibold text-sm" 
+            className="p-2 rounded-full transition-colors font-semibold text-sm" 
             aria-label="Change language"
+            style={{ 
+              color: !isScrolled ? '#FFFFFF' : undefined,
+              backgroundColor: 'transparent'
+            }}
           >
             {language.toUpperCase()}
           </button>
         </div>
         <button
           onClick={toggleMobileMenu}
-          className="p-2 rounded-md text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-border)] transition-colors focus:outline-none"
+          className="p-2 rounded-md hover:text-[var(--color-primary)] hover:bg-[var(--color-border)] transition-colors focus:outline-none"
+          style={{ color: !isScrolled ? '#FFFFFF' : undefined }}
           aria-label="Toggle menu"
           aria-expanded={isMobileMenuOpen}
         >

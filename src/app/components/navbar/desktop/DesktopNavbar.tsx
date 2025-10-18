@@ -3,7 +3,7 @@ import React from "react";
 import { useNavbarViewModel } from "./useDesktopNavbarViewModel";
 import List from "@/app/components/list/List";
 
-const DesktopNavbar = () => {
+const DesktopNavbar = ({ isScrolled }: { isScrolled?: boolean }) => {
   const { navItems } = useNavbarViewModel();
 
   return (
@@ -16,7 +16,8 @@ const DesktopNavbar = () => {
         renderItem={(data) => (
           <a
             href={`#${data.id}`}
-            className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+            className="hover:text-[var(--color-primary)] transition-colors"
+            style={{ color: !isScrolled ? '#FFFFFF' : undefined }}
           >
             {data.label}
           </a>

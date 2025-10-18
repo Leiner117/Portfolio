@@ -1,0 +1,31 @@
+export const PARTICLE_DENSITY_DIVISOR = 8000
+
+export const VELOCITY_VARIANCE = 0.8
+export const PARTICLE_MIN_SIZE = 0.5
+export const PARTICLE_MAX_RANDOM_SIZE = 2
+
+export const PARTICLE_OPACITY_VARIANCE = 0.5
+export const PARTICLE_OPACITY_MIN = 0.3
+
+export const MOUSE_MAX_DISTANCE = 150
+export const MOUSE_FORCE_MULTIPLIER = 3
+
+export const ATTRACTION_FORCE = 0.05
+
+export const DISPERSION_FORCE = 0.3
+export const DISPERSION_TIMER = 30
+
+export const MAX_SPEED_ATTRACTION = 5
+export const MAX_SPEED_DISPERSE = 8
+
+export const VELOCITY_DAMPING = 0.98
+export const VELOCITY_RANDOM_THRESHOLD = 0.5
+export const VELOCITY_RANDOM_MAG = 0.1
+
+export const PARTICLE_GLOW_THRESHOLD = 1.5
+export const PARTICLE_GLOW_SIZE_MULTIPLIER = 2
+export const PARTICLE_GLOW_ALPHA_FACTOR = 0.1
+
+export const CONNECTION_DISTANCE = 100
+export const CONNECTION_ALPHA_FACTOR = 0.1
+export const CONNECTION_LINE_WIDTH = 0.5
