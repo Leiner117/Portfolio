@@ -23,12 +23,49 @@ export interface SkillsOrbitViewModel {
 }
 
 export const useSkillsOrbitViewModel = (skills: Skill[]): SkillsOrbitViewModel => {
+  const normalize = (s: string) =>
+    s
+      .toString()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .trim();
+
   const grouped = useMemo(() => {
+    const isFrontend = (cat = "") => {
+      const n = normalize(cat);
+      return n.includes("front") || n.includes("ui") || n.includes("frontend");
+    };
+    const isBackend = (cat = "") => {
+      const n = normalize(cat);
+      return n.includes("back") || n.includes("server") || n.includes("backend");
+    };
+    const isData = (cat = "") => {
+      const n = normalize(cat);
+      return (
+        n.includes("data") ||
+        n.includes("datos") ||
+        n.includes("data tools") ||
+        n.includes("herramientas de datos") ||
+        n.includes("database") ||
+        n.includes("base de datos")
+      );
+    };
+    const isTools = (cat = "") => {
+      const n = normalize(cat);
+      return (
+        n.includes("tool") ||
+        n.includes("tools") ||
+        n.includes("herramienta") ||
+        n.includes("herramientas")
+      );
+    };
+
     return {
-      Frontend: skills.filter((s) => s.category.includes("Frontend")),
-      Backend: skills.filter((s) => s.category.includes("Backend")),
-      Data: skills.filter((s) => s.category.includes("Data")),
-      Tools: skills.filter((s) => s.category.includes("Tools")),
+      Frontend: skills.filter((s) => isFrontend(s.category)),
+      Backend: skills.filter((s) => isBackend(s.category)),
+      Data: skills.filter((s) => isData(s.category)),
+      Tools: skills.filter((s) => isTools(s.category)),
     };
   }, [skills]);
 

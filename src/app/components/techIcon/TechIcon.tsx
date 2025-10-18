@@ -45,21 +45,25 @@ type Props = {
   name: string;
   size?: number;
   className?: string;
+  iconKey?: string;
 };
 
-const TechIcon: React.FC<Props> = ({ name, size = 16, className = "" }) => {
-  const key = name.toLowerCase().trim();
+const TechIcon: React.FC<Props> = ({ name, size = 16, className = "", iconKey }) => {
+  const normalize = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .replace(/[._\-\s]+/g, " ")
+      .trim();
+  const normalizedName = normalize(name);
   const [isDark, setIsDark] = useState(false);
-
-  // ✅ Detecta tu sistema de temas basado en [data-theme="dark"]
   useEffect(() => {
     const checkTheme = () => {
       setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
     };
 
     checkTheme();
-
-    // Observa cambios en el atributo data-theme del <html>
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
@@ -68,8 +72,6 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "" }) => {
 
     return () => observer.disconnect();
   }, []);
-
-  // 🎨 Color dinámico según tema
   const iconColor = isDark ? "#ffffff" : "#000000";
 
   const commonProps = {
@@ -147,21 +149,52 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "" }) => {
     python: <FaPython {...commonProps} />,
   };
 
-  const matchKey = Object.keys(iconMap).find((k) => key.includes(k));
+  // Try to match using normalized values to better support translated names
+  // If an iconKey is provided (stable id/slug), try it first
+  if (iconKey) {
+    const ik = normalize(iconKey);
+    const found = Object.keys(iconMap).find((k) => normalize(k) === ik || normalize(k).includes(ik));
+    if (found) return iconMap[found];
+  }
+
+  const matchKey = Object.keys(iconMap).find((k) => {
+    const nk = normalize(k);
+    // direct include checks
+    if (normalizedName.includes(nk) || nk.includes(normalizedName)) return true;
+    // split into words and check any word equals key
+    const nameWords = normalizedName.split(" ");
+    const keyWords = nk.split(" ");
+    if (nameWords.some((w) => keyWords.includes(w))) return true;
+    return false;
+  });
   if (matchKey) return iconMap[matchKey];
 
   // fallback
+  // Fallback: show initials so translated names don't disappear
+  const getInitials = (s: string) => {
+    const parts = s.split(/\s+/).filter(Boolean);
+    if (parts.length === 0) return "";
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  };
+
   return (
     <span
-      className={className}
+      className={`inline-flex items-center justify-center ${className}`}
       style={{
-        display: "inline-block",
         width: size,
         height: size,
-        backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+        backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+        color: isDark ? "#fff" : "#000",
         borderRadius: "50%",
+        fontSize: Math.max(10, Math.floor(size / 2.5)),
+        fontWeight: 600,
       }}
-    />
+      aria-label={name}
+      title={name}
+    >
+      {getInitials(name)}
+    </span>
   );
 };
 

@@ -23,7 +23,7 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-16 scroll-mt-20">
-      <h2 className="text-3xl font-bold mb-8 text-[var(--color-primary)]">
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-[var(--color-primary)] text-center">
         {t.contact.title}
       </h2>
       <div className="bg-[var(--color-bg-secondary)] p-6 rounded-lg shadow-md border border-[var(--color-border)]">

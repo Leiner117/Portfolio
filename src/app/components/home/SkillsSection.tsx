@@ -13,7 +13,8 @@ const SkillsSection = () => {
     id: s.id ?? i,
     name: s.name,
     category: s.category,
-    icon: () => <TechIcon name={s.name} size={24} className="text-white" />,
+    iconKey: String(s.id ?? i),
+    icon: () => <TechIcon name={s.name} size={24} className="text-white" iconKey={String(s.id ?? i)} />,
   }));
 
   return (
