@@ -121,3 +121,25 @@ html {
 .experience-card:hover .timeline-marker {
   background: var(--card-hover-fg);
 }
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-slower {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+@keyframes spin-slowest {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+.animate-spin-slower {
+  animation: spin-slower 65s linear infinite;
+}
+.animate-spin-slowest {
+  animation: spin-slowest 90s linear infinite;
+}
