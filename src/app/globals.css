@@ -42,3 +42,12 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem; 
 }
+.timeline-card {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+.timeline-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+}
