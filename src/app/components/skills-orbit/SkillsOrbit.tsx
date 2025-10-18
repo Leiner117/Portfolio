@@ -8,22 +8,36 @@ interface SkillsOrbitProps {
 }
 
 const SkillsOrbit: React.FC<SkillsOrbitProps> = ({ skills }) => {
-  const { orbits, displayedSkill, isHovered, onEnter, onLeave } = useSkillsOrbitViewModel(skills);
+  const { orbits, displayedSkill, isHovered, onEnter, onLeave } =
+    useSkillsOrbitViewModel(skills);
 
   return (
-    <section className="relative flex flex-col items-center justify-center w-full min-h-[600px] sm:h-[750px] overflow-hidden text-black dark:text-white">
+    <section className="relative flex flex-col items-center justify-center w-full min-h-[500px] sm:h-[600px] overflow-hidden text-black dark:text-white">
       <div className="relative w-[90vw] max-w-[500px] aspect-square flex items-center justify-center">
+        {/* Ícono central */}
         <div className="absolute z-30 flex flex-col items-center justify-center transition-all duration-700">
-          <div className="p-5 rounded-full border border-gray-400 dark:border-gray-600 bg-white/5 dark:bg-black/20 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-transform duration-500">
+          <div
+            className="p-5 rounded-full border border-gray-400 dark:border-gray-600 transition-transform duration-500"
+            style={{
+              background: "var(--orbit-center-bg)",
+              boxShadow: "0 0 20px var(--orbit-center-shadow)",
+            }}
+          >
             <TechIcon
               name={displayedSkill.name}
               size={48}
               className="text-black dark:text-white transition-transform duration-500"
             />
           </div>
-          <p className="text-sm mt-2 font-semibold">{displayedSkill.name}</p>
+          <p
+            className="text-sm mt-2 font-semibold transition-colors duration-500"
+            style={{ color: "var(--orbit-text-color)" }}
+          >
+            {displayedSkill.name}
+          </p>
         </div>
 
+        {/* Órbitas */}
         {orbits.map((orbit, orbitIndex) => (
           <div
             key={orbitIndex}
@@ -47,12 +61,16 @@ const SkillsOrbit: React.FC<SkillsOrbitProps> = ({ skills }) => {
                   }}
                   onMouseEnter={() => onEnter(s)}
                   onMouseLeave={onLeave}
-                  className={`absolute pointer-events-auto cursor-pointer text-gray-800 dark:text-gray-200 transition-colors duration-300 ${
-                    hovered ? "text-black dark:text-white z-50" : "opacity-90"
+                  className={`absolute pointer-events-auto cursor-pointer transition-colors duration-300 ${
+                    hovered ? "z-50 scale-105" : "opacity-90"
                   }`}
                   title={s.name}
                 >
-                  <TechIcon name={s.name} size={26} />
+                  <TechIcon
+                    name={s.name}
+                    size={26}
+                    className="text-black dark:text-white transition-colors duration-300"
+                  />
                 </div>
               );
             })}
