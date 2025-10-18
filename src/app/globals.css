@@ -143,3 +143,16 @@ html {
 .animate-spin-slowest {
   animation: spin-slowest 90s linear infinite;
 }
+:root {
+  /* ...tus otras variables */
+  --orbit-center-bg: #ffffff;
+  --orbit-center-shadow: rgba(0, 0, 0, 0.3);
+   --orbit-text-color: #000000;
+}
+
+[data-theme="dark"] {
+  /* ...tus otras variables */
+  --orbit-center-bg: #000000;
+  --orbit-center-shadow: rgba(255, 255, 255, 0.3);
+  --orbit-text-color: #ffffff;
+}
