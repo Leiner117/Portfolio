@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   FaReact,
-  FaNodeJs,
   FaPython,
   FaUnity,
   FaGitAlt,
@@ -15,6 +14,7 @@ import {
   SiCsharp,
   SiTypescript,
   SiNextdotjs,
+  SiNodedotjs,
   SiTailwindcss,
   SiJavascript,
   SiHtml5,
@@ -48,7 +48,12 @@ type Props = {
   iconKey?: string;
 };
 
-const TechIcon: React.FC<Props> = ({ name, size = 16, className = "", iconKey }) => {
+const TechIcon: React.FC<Props> = ({
+  name,
+  size = 16,
+  className = "",
+  iconKey,
+}) => {
   const normalize = (s: string) =>
     s
       .toLowerCase()
@@ -81,7 +86,6 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "", iconKey })
   };
 
   const iconMap: Record<string, React.ReactElement> = {
-    // --- Frontend ---
     react: <FaReact {...commonProps} />,
     "next.js": <SiNextdotjs {...commonProps} />,
     next: <SiNextdotjs {...commonProps} />,
@@ -92,9 +96,10 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "", iconKey })
     css: <SiCss3 {...commonProps} />,
     vite: <SiVite {...commonProps} />,
     redux: <SiRedux {...commonProps} />,
-
-    // --- Backend ---
-    node: <FaNodeJs {...commonProps} />,
+    node: <SiNodedotjs {...commonProps} />,
+    "node.js": <SiNodedotjs {...commonProps} />,
+    nodejs: <SiNodedotjs {...commonProps} />,
+    "node js": <SiNodedotjs {...commonProps} />,
     express: <SiExpress {...commonProps} />,
     django: <SiDjango {...commonProps} />,
     "fast api": <SiFastapi {...commonProps} />,
@@ -116,8 +121,6 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "", iconKey })
     "unity game services": <TbBrandUnity {...commonProps} />,
     ugs: <TbBrandUnity {...commonProps} />,
     graphql: <SiGraphql {...commonProps} />,
-
-    // --- Database & Data Tools ---
     sql: <PiFileSql {...commonProps} />,
     postgresql: <SiPostgresql {...commonProps} />,
     pandas: <SiPandas {...commonProps} />,
@@ -131,8 +134,6 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "", iconKey })
     mongodb: <SiMongodb {...commonProps} />,
     jupyter: <SiJupyter {...commonProps} />,
     tensorflow: <SiTensorflow {...commonProps} />,
-
-    // --- Cloud & DevOps ---
     firebase: <SiFirebase {...commonProps} />,
     firestore: <SiFirebase {...commonProps} />,
     functions: <SiFirebase {...commonProps} />,
@@ -141,36 +142,36 @@ const TechIcon: React.FC<Props> = ({ name, size = 16, className = "", iconKey })
     gcp: <SiGooglecloud {...commonProps} />,
     azure: <SiAzuredevops {...commonProps} />,
     docker: <FaDocker {...commonProps} />,
-
-    // --- Tools ---
     git: <FaGitAlt {...commonProps} />,
     "open ai": <SiOpenai {...commonProps} />,
     openai: <SiOpenai {...commonProps} />,
     python: <FaPython {...commonProps} />,
   };
-
-  // Try to match using normalized values to better support translated names
-  // If an iconKey is provided (stable id/slug), try it first
   if (iconKey) {
     const ik = normalize(iconKey);
-    const found = Object.keys(iconMap).find((k) => normalize(k) === ik || normalize(k).includes(ik));
+    const found = Object.keys(iconMap).find(
+      (k) => normalize(k) === ik || normalize(k).includes(ik)
+    );
     if (found) return iconMap[found];
   }
-
   const matchKey = Object.keys(iconMap).find((k) => {
     const nk = normalize(k);
-    // direct include checks
+    if (nk === normalizedName) return true;
     if (normalizedName.includes(nk) || nk.includes(normalizedName)) return true;
-    // split into words and check any word equals key
-    const nameWords = normalizedName.split(" ");
-    const keyWords = nk.split(" ");
-    if (nameWords.some((w) => keyWords.includes(w))) return true;
+    const nameWords = normalizedName.split(" ").filter(Boolean);
+    const keyWords = nk.split(" ").filter(Boolean);
+    const nameLong = nameWords.filter((w) => w.length > 2);
+    const keyLong = keyWords.filter((w) => w.length > 2);
+    if (
+      nameLong.length > 0 &&
+      keyLong.length > 0 &&
+      nameLong.some((w) => keyLong.includes(w))
+    )
+      return true;
+
     return false;
   });
   if (matchKey) return iconMap[matchKey];
-
-  // fallback
-  // Fallback: show initials so translated names don't disappear
   const getInitials = (s: string) => {
     const parts = s.split(/\s+/).filter(Boolean);
     if (parts.length === 0) return "";
