@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Head() {
+const Head = () => {
   const title = "Leiner Alvarado Rodriguez — Portfolio";
   const description =
     "Desarrollador Fullstack. Portafolio con proyectos, experiencia y habilidades.";
@@ -33,4 +33,6 @@ export default function Head() {
       <meta name="twitter:image" content={image} />
     </>
   );
-}
+};
+
+export default Head;
