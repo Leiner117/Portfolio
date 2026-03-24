@@ -11,6 +11,8 @@ const SkillsOrbit: React.FC<SkillsOrbitProps> = ({ skills }) => {
   const { orbits, displayedSkill, isHovered, onEnter, onLeave } =
     useSkillsOrbitViewModel(skills);
 
+  const handleEnter = (skill: Skill) => () => onEnter(skill);
+
   return (
     <section className="relative flex flex-col items-center justify-center w-full min-h-[500px] sm:h-[600px] overflow-hidden text-black dark:text-white">
       <div className="relative w-[90vw] max-w-[500px] aspect-square flex items-center justify-center">
@@ -46,8 +48,9 @@ const SkillsOrbit: React.FC<SkillsOrbitProps> = ({ skills }) => {
           >
             {orbit.group.map((s: Skill, i: number) => {
               const angle = (i / orbit.group.length) * 2 * Math.PI;
-              const x = Math.cos(angle) * orbit.radius;
-              const y = Math.sin(angle) * orbit.radius;
+              // Round to 3 decimal places — prevents server/client float mismatch
+              const x = Math.round(Math.cos(angle) * orbit.radius * 1000) / 1000;
+              const y = Math.round(Math.sin(angle) * orbit.radius * 1000) / 1000;
               const hovered = isHovered(s.id);
 
               return (
@@ -57,12 +60,11 @@ const SkillsOrbit: React.FC<SkillsOrbitProps> = ({ skills }) => {
                     transform: `translate(${x}px, ${y}px)`,
                     top: "50%",
                     left: "50%",
-                    animationPlayState: hovered ? "paused" : "running",
                   }}
-                  onMouseEnter={() => onEnter(s)}
+                  onMouseEnter={handleEnter(s)}
                   onMouseLeave={onLeave}
                   className={`absolute pointer-events-auto cursor-pointer transition-colors duration-300 ${
-                    hovered ? "z-50 scale-105" : "opacity-90"
+                    hovered ? "z-50 scale-105 [animation-play-state:paused]" : "opacity-90 [animation-play-state:running]"
                   }`}
                   title={s.name}
                 >
