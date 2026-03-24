@@ -7,6 +7,10 @@ export const ExperienceTimeline: React.FC = () => {
   const { experiences, visibleItems, lineProgress, itemRefs, timelineRef } =
     useExperienceTimelineViewModel();
 
+  const setItemRef = (index: number) => (el: HTMLDivElement | null) => {
+    itemRefs.current[index] = el;
+  };
+
   return (
     <div ref={timelineRef} className="relative max-w-5xl mx-auto">
       <div className="hidden md:block absolute left-4 md:left-1/2 top-0 bottom-0 w-px">
@@ -53,9 +57,7 @@ export const ExperienceTimeline: React.FC = () => {
           return (
             <div
               key={index}
-              ref={(el) => {
-                itemRefs.current[index] = el;
-              }}
+              ref={setItemRef(index)}
               data-index={index}
               className={
                 "relative flex items-center " +
