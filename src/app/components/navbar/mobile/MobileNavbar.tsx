@@ -25,8 +25,8 @@ const MobileNavbar = ({ onToggleTheme, theme, isScrolled }: { onToggleTheme?: ()
       <div className="flex items-center justify-between">
           <div className="flex items-center">
           <span className="font-bold mr-3" style={{ color: theme === 'dark' ? '#FFFFFF' : (!isScrolled ? '#FFFFFF' : undefined) }}>Leiner Alvarado</span>
-          <button 
-            onClick={() => onToggleTheme && onToggleTheme()}
+          <button
+            onClick={onToggleTheme}
             className="mr-3 p-2 rounded-full transition-colors flex items-center justify-center" 
             aria-label="Toggle theme"
             style={{ 
