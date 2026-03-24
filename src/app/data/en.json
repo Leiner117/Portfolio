@@ -29,7 +29,10 @@
       "description": "Developed a responsive website for a tourism company using Next.js, TypeScript, and Firebase, focusing on SEO optimization and performance.",
       "technologies": ["Next.js", "TypeScript", "Firebase"],
       "link": "#",
-      "github": "https://github.com/Leiner117"
+      "github": "https://github.com/Leiner117",
+      "status": "complete",
+      "images": [],
+      "logo": ""
     },
     {
       "id": 2,
@@ -37,7 +40,10 @@
       "description": "Contributed to a SaaS platform for medical clinics, implementing Firebase Cloud Functions and optimizing Firestore queries to reduce client costs.",
       "technologies": ["React", "Firebase", "TypeScript"],
       "link": "#",
-      "github": "https://github.com/Leiner117"
+      "github": "https://github.com/Leiner117",
+      "status": "active",
+      "images": [],
+      "logo": ""
     },
     {
       "id": 3,
@@ -45,7 +51,10 @@
       "description": "Collaborated with a multidisciplinary team to create a metaverse for TEC, building C# scripts for spatial audio, movement, and multiplayer synchronization.",
       "technologies": ["Unity", "C#", "Unity Game Services"],
       "link": "#",
-      "github": "https://github.com/Leiner117"
+      "github": "https://github.com/Leiner117",
+      "status": "active",
+      "images": [],
+      "logo": ""
     }
   ],
   "experience": [
@@ -134,5 +143,20 @@
     "email": "leineralvarador117@gmail.com",
     "linkedin": "https://linkedin.com/in/leiner-alvarado-357725247",
     "github": "https://github.com/Leiner117"
+  },
+  "missions": {
+    "missionLogs": "MISSION LOGS",
+    "missionPrefix": "MISSION",
+    "status": {
+      "active": "ACTIVE",
+      "complete": "COMPLETE"
+    },
+    "equipment": "EQUIPMENT",
+    "github": "GITHUB",
+    "viewFiles": "VIEW FILES",
+    "missionBrief": "MISSION BRIEF",
+    "liveSite": "LIVE SITE",
+    "noVisualData": "// NO VISUAL DATA AVAILABLE",
+    "classified": "CLASSIFIED"
   }
 }
