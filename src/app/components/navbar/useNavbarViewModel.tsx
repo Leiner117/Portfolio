@@ -38,16 +38,16 @@ export const useNavbarViewModel = (): NavbarViewModel => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const [theme, setTheme] = useState<ThemeMode>(() => {
-    if (typeof window === "undefined") return DEFAULT_THEME;
-    return (localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode) || DEFAULT_THEME;
-  });
+  const [theme, setTheme] = useState<ThemeMode>(DEFAULT_THEME);
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      if (theme === DARK_THEME) document.documentElement.setAttribute(DATA_THEME_ATTRIBUTE, DARK_THEME);
-      else document.documentElement.removeAttribute(DATA_THEME_ATTRIBUTE);
-    }
+    const saved = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null;
+    if (saved) setTheme(saved);
+  }, []);
+
+  useEffect(() => {
+    if (theme === DARK_THEME) document.documentElement.setAttribute(DATA_THEME_ATTRIBUTE, DARK_THEME);
+    else document.documentElement.removeAttribute(DATA_THEME_ATTRIBUTE);
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
     } catch {}
