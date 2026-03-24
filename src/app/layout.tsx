@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   description: "Personal Portfolio of Leiner Alvarado Rodriguez",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en" translate="no">
       <body
@@ -41,4 +41,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
