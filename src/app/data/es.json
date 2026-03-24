@@ -29,7 +29,10 @@
       "description": "Desarrollé un sitio web responsivo utilizando Next.js, TypeScript y Firebase, con enfoque en SEO y rendimiento.",
       "technologies": ["Next.js", "TypeScript", "Firebase"],
       "link": "#",
-      "github": "https://github.com/Leiner117"
+      "github": "https://github.com/Leiner117",
+      "status": "complete",
+      "images": [],
+      "logo": ""
     },
     {
       "id": 2,
@@ -37,7 +40,10 @@
       "description": "Contribuí en el desarrollo de una plataforma SaaS para clínicas médicas, implementando Firebase Cloud Functions y optimizando consultas en Firestore para reducir costos.",
       "technologies": ["React", "Firebase", "TypeScript"],
       "link": "#",
-      "github": "https://github.com/Leiner117"
+      "github": "https://github.com/Leiner117",
+      "status": "active",
+      "images": [],
+      "logo": ""
     },
     {
       "id": 3,
@@ -45,7 +51,10 @@
       "description": "Colaboré con un equipo multidisciplinario en la creación de un metaverso para el TEC, desarrollando scripts en C# para audio espacial, movimiento de jugadores y sincronización multijugador.",
       "technologies": ["Unity", "C#", "Unity Game Services"],
       "link": "#",
-      "github": "https://github.com/Leiner117"
+      "github": "https://github.com/Leiner117",
+      "status": "active",
+      "images": [],
+      "logo": ""
     }
   ],
   "experience": [
@@ -134,5 +143,20 @@
     "email": "leineralvarador117@gmail.com",
     "linkedin": "https://linkedin.com/in/leiner-alvarado-357725247",
     "github": "https://github.com/Leiner117"
+  },
+  "missions": {
+    "missionLogs": "REGISTROS DE MISIÓN",
+    "missionPrefix": "MISIÓN",
+    "status": {
+      "active": "ACTIVO",
+      "complete": "COMPLETO"
+    },
+    "equipment": "EQUIPO",
+    "github": "GITHUB",
+    "viewFiles": "VER ARCHIVOS",
+    "missionBrief": "RESUMEN DE MISIÓN",
+    "liveSite": "SITIO EN VIVO",
+    "noVisualData": "// SIN DATOS VISUALES DISPONIBLES",
+    "classified": "CLASIFICADO"
   }
 }
