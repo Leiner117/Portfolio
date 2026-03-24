@@ -11,6 +11,7 @@
   --color-success: #2E7D32;
   --color-error: #C62828;
 
+  --grid-line: rgba(0, 0, 0, 0.04);
   --background: var(--color-bg);
   --foreground: var(--color-text);
   --timeline-color: var(--color-text);
@@ -36,6 +37,7 @@
   --color-border: #1F1F1F;
   --color-success: #66BB6A;
   --color-error: #EF9A9A;
+  --grid-line: rgba(255, 255, 255, 0.022);
   --timeline-color: var(--color-text);
   /* override card colors for dark theme */
   --card-bg: rgba(255,255,255,0.04);
@@ -143,6 +145,39 @@ html {
 .animate-spin-slowest {
   animation: spin-slowest 90s linear infinite;
 }
+@keyframes radar-expand {
+  0%   { transform: scale(1);    opacity: 0.5; }
+  100% { transform: scale(8);    opacity: 0;   }
+}
+.radar-ring {
+  animation: radar-expand 5.6s ease-out infinite;
+}
+@keyframes nebula-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 1; }
+  50%       { transform: translate(-50%, -50%) scale(1.18); opacity: 0.7; }
+}
+@keyframes dust-drift {
+  0%   { transform: translate(0, 0);           opacity: 0;   }
+  10%  { transform: translate(-2px, -5px);     opacity: 1;   }
+  90%  { transform: translate(-14px, -24px);   opacity: 0.5; }
+  100% { transform: translate(-18px, -30px);   opacity: 0;   }
+}
+.nebula-blob {
+  animation: nebula-pulse 7s ease-in-out infinite;
+}
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+@keyframes constellation-line-breathe {
+  0%, 100% { stroke-opacity: 0.13; }
+  50% { stroke-opacity: 0.28; }
+}
+
 :root {
   /* ...tus otras variables */
   --orbit-center-bg: #ffffff;
