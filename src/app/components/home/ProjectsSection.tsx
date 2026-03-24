@@ -1,59 +1,86 @@
 "use client";
 import React from "react";
-import TechIcon from "@/app/components/techIcon/TechIcon";
 import { useLanguage } from "@/app/context/LanguageContext";
-import enData from "@/app/data/en.json";
-
-type Project = (typeof enData)["projects"][number];
+import MissionCard from "@/app/components/missions/MissionCard";
+import MissionModal from "@/app/components/missions/MissionModal";
+import ConstellationCanvas from "@/app/components/missions/ConstellationCanvas";
+import { useProjectsSectionViewModel, Project } from "./useProjectsSectionViewModel";
 
 const ProjectsSection = () => {
   const { t } = useLanguage();
+  const {
+    projects,
+    selected,
+    hoveredIndex,
+    targetRect,
+    sectionRef,
+    cardRefs,
+    handleCardEnter,
+    handleCardLeave,
+    handleSelect,
+    handleClose,
+  } = useProjectsSectionViewModel();
+
+  const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
+    cardRefs.current[index] = el;
+  };
+  const handleEnter  = (index: number) => () => handleCardEnter(index);
+  const handleClick  = (project: Project, index: number) => () => handleSelect(project, index);
 
   return (
-    <section id="projects" className="py-16 scroll-mt-20">
-      <h2 className="text-3xl font-bold mb-8 text-[var(--color-primary)]">
-        {t.sections.projects}
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {t.projects.map((project: Project) => (
-          <div
-            key={project.id}
-            className="bg-[var(--color-bg-secondary)] p-6 rounded-lg shadow-md border border-[var(--color-border)] hover:shadow-lg transition-shadow"
+    <section
+      ref={sectionRef}
+      id="projects"
+      className="relative w-full py-24 scroll-mt-20"
+      style={{ background: "var(--color-bg)" }}
+    >
+      <ConstellationCanvas targetRect={targetRect} />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+
+        {/* Header */}
+        <div className="mb-14">
+          <span
+            className="font-mono text-[11px] tracking-[0.25em] block mb-3"
+            style={{ color: "var(--color-secondary)", opacity: 0.6 }}
           >
-            <h3 className="text-xl font-bold mb-2 text-[var(--color-text)]">
-              {project.title}
-            </h3>
-            <p className="text-[var(--color-text-secondary)] mb-4">
-              {project.description}
-            </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.technologies.map((tech: string, index: number) => (
-                <span
-                  key={index}
-                  className="flex items-center text-xs bg-[var(--color-primary)] text-[var(--color-bg)] px-2 py-1 rounded space-x-2"
-                >
-                  <TechIcon name={tech} className="text-[var(--color-bg)]" />
-                  <span className="ml-1">{tech}</span>
-                </span>
-              ))}
+            &gt; {t.missions.missionLogs}
+          </span>
+          <h2
+            className="text-3xl font-bold tracking-wide"
+            style={{ color: "var(--color-primary)" }}
+          >
+            {t.sections.projects}
+          </h2>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              ref={setCardRef(index)}
+              onMouseEnter={handleEnter(index)}
+              onMouseLeave={handleCardLeave}
+            >
+              <MissionCard
+                project={project}
+                index={index}
+                connected={hoveredIndex === index}
+                onClick={handleClick(project, index)}
+              />
             </div>
-            <div className="flex space-x-4">
-              <a
-                href={project.link}
-                className="text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors"
-              >
-                View
-              </a>
-              <a
-                href={project.github}
-                className="text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
+      {selected && (
+        <MissionModal
+          project={selected.project}
+          index={selected.index}
+          onClose={handleClose}
+        />
+      )}
     </section>
   );
 };
